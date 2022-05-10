@@ -21,36 +21,42 @@ $content  = $utmContent;
 //$medium  = $utmCookieMedium;
 $term    = $utmCookieTerm;
 
+/*
 $_SESSION["source"]   = $source;
 $_SESSION["campana"]  = $campaign;
 $_SESSION["idcookie"] = $cId;
 $_SESSION["content"]  = $content;
 //$_SESSION["medium"]   = $medium;
 $_SESSION["term"]     = $term;
+*/
 
 
-/*
-
-if ( !empty($source) || !empty($medium) || !empty($campaign) || !empty($term) ) {
-    $_SESSION["source"]=$source;
-    $_SESSION["medium"]=$medium;
-    $_SESSION["campaign"]=$campaign;
-    $_SESSION["term"]=$term;
+if ( !empty($source) || !empty($campaign) || !empty($cId) || !empty($content) || !empty($term) ) {
+    $_SESSION["source"]   = $source;
+    $_SESSION["campana"]  = $campaign;
+    $_SESSION["idcookie"] = $cId;
+    $_SESSION["content"]  = $content;
+    //$_SESSION["medium"]   = $medium;
+    $_SESSION["term"]     = $term;
 
     //echo "if: ".$source;
 } else {
-    $source ="organico";
-    $medium= 0;
-    $campaign= 0;
-    $term=0;
+    //seteamos si las variables vienen vacias
+    $source = 'organico';
+    $campaign = '0';
+    $cId = '0';
+    $content = '0';
+    $term = '0';
 
-    $_SESSION["source"]=$source;
-    $_SESSION["medium"]=$medium;
-    $_SESSION["campaign"]=$campaign;
-    $_SESSION["term"]=$term;
+    // volemos a generar las variables de sesion
+    $_SESSION["source"]   = $source;
+    $_SESSION["campana"]  = $campaign;
+    $_SESSION["idcookie"] = $cId;
+    $_SESSION["content"]  = $content;
+    //$_SESSION["medium"]   = $medium;
+    $_SESSION["term"]     = $term;
 
     //echo "else: ".$source;
 }
 
-*/
 ?>
