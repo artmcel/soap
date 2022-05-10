@@ -9,21 +9,24 @@ UtmCookie::setOverwrite(false);
 UtmCookie::setLifetime(new DateInterval('P1Y'));
 $utmCookieSource = UtmCookie::get('utm_source');
 $utmCookieCampaign = UtmCookie::get('utm_campaign');
+$utmCookieId = UtmCookie::get('utm_id');
+$utmContent = UtmCookie::get('utm_content');
 $utmCookieMedium = UtmCookie::get('utm_medium');
 $utmCookieTerm = UtmCookie::get('utm_term');
-$utmCookieId = UtmCookie::get('utm_id');
 
-$campaign = $utmCookieCampaign;                        
-$medium = $utmCookieMedium;
 $source  = $utmCookieSource;
-$term = $utmCookieTerm;
+$campaign = $utmCookieCampaign;                        
 $cId = $utmCookieId;
+$content = $utmContent; 
+$medium = $utmCookieMedium;
+$term = $utmCookieTerm;
 
-echo $campaign;
-echo $medium;
-echo $source;
-echo $term;
-echo $utmCookieId;
+$_SESSION["source"] = $source;
+$_SESSION["campana"] = $campaign;
+$_SESSION["idcookie"] = $cId;
+$_SESSION["content"] = $content;
+$_SESSION["medium"] = $medium;
+$_SESSION["term"] = $term;
 
 
 /*
