@@ -41,27 +41,95 @@ abstract class WebService{
         $this->SoapClientAddNuevoIngreso    = new SoapClient($urlN);
         */
     }
-    
+
 }
 
 
 /**
- * definimos las clases para cada plantel
+ * 
+ * definimos las clases para cada plantel,
+ * hay que esperar la definicion del formulario ya que podria ser solo una clase para todos los planteles
+ * 
  */
 
 class IZCALlI  extends WebService{
 
+    public function guardaProspectoIzcalli( $args = array() ){
+
+        if( !isset($args) || strlen($args < 0) ) throw 'argumentos de nuevo ingreso login vacios';
+
+		try {
+			//code...
+			$r = $this->SoapClientAdd->__soapCall("nombre del metodo del ws", array(
+				"nombre del metodo del ws" => $args
+			));
+			$d = $r->"nombre del metodo del ws"Result->EntPrope;
+			return $d;
+		} catch (\Throwable $th) {
+			throw $th;
+		}
+	}
+
+
 }
 
 class SATELITE  extends WebService{
+
+    public function guardaProspectoSatelite( $args = array() ){
+
+        if( !isset($args) || strlen($args < 0) ) throw 'argumentos de nuevo ingreso login vacios';
+
+		try {
+			//code...
+			$r = $this->SoapClientAdd->__soapCall("nombre del metodo del ws", array(
+				"nombre del metodo del ws" => $args
+			));
+			$d = $r->"nombre del metodo del ws"Result->EntPrope;
+			return $d;
+		} catch (\Throwable $th) {
+			throw $th;
+		}
+	}
     
 }
 
 class POLANCO  extends WebService{
+
+    public function guardaProspectoPolanco( $args = array() ){
+
+        if( !isset($args) || strlen($args < 0) ) throw 'argumentos de nuevo ingreso login vacios';
+
+		try {
+			//code...
+			$r = $this->SoapClientAdd->__soapCall("nombre del metodo del ws", array(
+				"nombre del metodo del ws" => $args
+			));
+			$d = $r->"nombre del metodo del ws"Result->EntPrope;
+			return $d;
+		} catch (\Throwable $th) {
+			throw $th;
+		}
+	}
     
 }
 
 class VERACRUZ  extends WebService{
+
+    public function guardaProspectoVeracruz( $args = array() ){
+
+        if( !isset($args) || strlen($args < 0) ) throw 'argumentos de nuevo ingreso login vacios';
+
+		try {
+			//code...
+			$r = $this->SoapClientAdd->__soapCall("nombre del metodo del ws", array(
+				"nombre del metodo del ws" => $args
+			));
+			$d = $r->"nombre del metodo del ws"Result->EntPrope;
+			return $d;
+		} catch (\Throwable $th) {
+			throw $th;
+		}
+	}
     
 }
 
