@@ -40,7 +40,8 @@ class UtmCookie
 		'utm_medium',
 		'utm_source',
 		'utm_term',
-		'utm_content'
+		'utm_content',
+		'utm_id'
 	];
 	
 	/**
@@ -139,7 +140,8 @@ class UtmCookie
 					'utm_medium'   => FILTER_SANITIZE_STRING, 
 					'utm_source'   => FILTER_SANITIZE_STRING, 
 					'utm_term'     => FILTER_SANITIZE_STRING, 
-					'utm_content'  => FILTER_SANITIZE_STRING
+					'utm_content'  => FILTER_SANITIZE_STRING,
+					'utm_id'       => FILTER_SANITIZE_STRING
 				]
 		);
 		if (false === is_array($utmGetFilter)) {
@@ -174,7 +176,8 @@ class UtmCookie
 			'utm_medium'   => null, 
 			'utm_source'   => null, 
 			'utm_term'     => null, 
-			'utm_content'  => null
+			'utm_content'  => null,
+			'utm_id'       => null
 		];
 
 		
