@@ -7,7 +7,7 @@ echo $_SESSION["source"]."<br>";
 echo $_SESSION["campana"]."<br>";
 echo $_SESSION["idcookie"]."<br>";
 echo $_SESSION["content"]."<br>";
-echo $_SESSION["medium"]."<br>";
+//echo $_SESSION["medium"]."<br>";
 echo $_SESSION["term"]."<br>";
 
 
