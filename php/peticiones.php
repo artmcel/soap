@@ -18,12 +18,12 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
  * request url
  */
 
-$url = $_GET['obtener'];
+$url       = $_GET['obtener'];
 $idPlantel = $_GET['idPlantel'];
-$idNivel = $_GET['idNivel'];
+$idNivel   = $_GET['idNivel'];
 $idPeriodo = $_GET['idPeriodo'];
 $idCarrera = $_GET['idCarrera'];
-$idModo = $_GET['idModo'];
+$idModo    = $_GET['idModo'];
 
 /*
 
@@ -127,47 +127,34 @@ if( $url == "horarios" ){
 if( $url == "guardaDatos" ){
     
     $recibeJson = json_decode(file_get_contents('php://input'), false);
-    //echo json_encode($args);
-    $datos = (array)$recibeJson;
+    $datos      = (array)$recibeJson;
 
     $args = array(
 
-        'campaignContent'=> $datos['utm_content'],
-        'campaignMedium'=> $datos['utm_medium'],
-        'campaignTerm'=> $datos['utm_id'],
-        'descripPublicidad'=> $datos['utm_campaign'],
-        'folioReferido'=> '0',               
-        'pApMaterno' => $datos['amaterno'],
-        'pApPaterno' => $datos['apaterno'],
-        'pCarrera' => $datos['carrera'],
-        'pCelular' => $datos['celular'],
-        'pCorreo' => $datos['email'],
-        'pHorario' => $datos['horario'],
-        'pNivel_Estudio' => $datos['nivel'],
-	    'pNombre' => $datos['nombre'],
-        'pOrigen' => '13',
-        'pPeriodoEscolar' => $datos['periodo'],
-        'pPlantel' => $datos['plantel'],
-        'pTelefono' => $datos['telefono'],
-        'utpsource'=> $datos['utm_source'],
-        'websiteURL'=> null,
+        'campaignContent'   => $datos['utm_content'],
+        'campaignMedium'    => $datos['utm_medium'],
+        'campaignTerm'      => $datos['utm_id'],
+        'descripPublicidad' => $datos['utm_campaign'],
+        'folioReferido'     => '0',               
+        'pApMaterno'        => $datos['amaterno'],
+        'pApPaterno'        => $datos['apaterno'],
+        'pCarrera'          => $datos['carrera'],
+        'pCelular'          => $datos['celular'],
+        'pCorreo'           => $datos['email'],
+        'pHorario'          => $datos['horario'],
+        'pNivel_Estudio'    => $datos['nivel'],
+	    'pNombre'           => $datos['nombre'],
+        'pOrigen'           => '13',
+        'pPeriodoEscolar'   => $datos['periodo'],
+        'pPlantel'          => $datos['plantel'],
+        'pTelefono'         => $datos['telefono'],
+        'utpsource'         => $datos['utm_source'],
+        'websiteURL'        => null,
     );
 
     //print_r($args);
     $guardaDatos($args);
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 ?>
