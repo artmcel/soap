@@ -50,7 +50,8 @@ class COMBOS extends WebService{
 			return $d;
 
 		} catch (\Throwable $th) {
-			throw $th;
+			//throw $th;
+			echo 'el error es: '.$th->getMessage();
 		}
 	}
 
@@ -66,7 +67,8 @@ class COMBOS extends WebService{
 			return $d;
 
 		} catch (\Throwable $th) {
-			throw $th;
+			//throw $th;
+			echo 'el error es: '.$th->getMessage();
 		}
 	}
 	
@@ -82,7 +84,8 @@ class COMBOS extends WebService{
 			return $d;
 
 		} catch (\Throwable $th) {
-			throw $th;
+			//throw $th;
+			echo 'el error es: '.$th->getMessage();
 		}
 	}
 
@@ -102,7 +105,8 @@ class COMBOS extends WebService{
 			return $d;
 
 		} catch (\Throwable $th) {
-			throw $th;
+			//throw $th;
+			echo 'el error es: '.$th->getMessage();
 		}
 	}
 
@@ -123,7 +127,8 @@ class COMBOS extends WebService{
 			return $d;
 
 		} catch (\Throwable $th) {
-			throw $th;
+			//throw $th;
+			echo 'el error es: '.$th->getMessage();
 		}
 	}
 
@@ -143,7 +148,8 @@ class COMBOS extends WebService{
 			return $d;
 
 		} catch (\Throwable $th) {
-			throw $th;
+			//throw $th;
+			echo 'el error es: '.$th->getMessage();
 		}
 	}
 
