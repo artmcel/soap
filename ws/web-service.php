@@ -8,6 +8,7 @@ abstract class WebService{
     public $SoapClientAdd;
     //consulta del ws
     public $SoapClientQuery;
+	public $SoapClientQuerySua;
 
 
     public function __construct(){
@@ -16,30 +17,14 @@ abstract class WebService{
          * esperamos la url de los ws
          */
 
-        $url  = "http://187.188.111.155/TestingWSOperacionesUnificadas/OperacionesUnificadas.asmx?WSDL";
-        //calculadora ocupa el de arriba para los planteles y 
-        $urlC = "http://187.188.111.155/TestingWSOperacionesUnificadas/calculadoracuotas.asmx?WSDL";
-        //test...->ocupa operaciones unificadas para el registro
-        //preinscripcion...->ocupa operaciones unificadas y
-        $urlP = "http://187.188.111.155/TestingWSOperacionesUnificadas/PreinscripcionEnLinea.asmx?WSDL";
-        //nuevo ingreso... usa operaciones unificadas para consulta de planteles y:
-        $urlN = "http://187.188.111.155/TestingWSOperacionesUnificadas/Propedeutico.asmx?WSDL";
-        /**
-         * estos tres son solo registro y solo retornan una respuesta
-         * prospectacion...usa operaciones unificadas
-         * dia unimex... operacionesUnificadas
-         * proyeccion...operacionesUnificadas
-         * 
-         */
+        $url    = "http://187.188.111.155/TestingWSOperacionesUnificadas/OperacionesUnificadas.asmx?WSDL";
+		$urlSua = "http://187.188.111.155/TestingWSOperacionesUnificadas/SideTrack.asmx?WSDL";
 
         //llamadas al soapClient
-        $this->SoapClientQuery              = new SoapClient($url);
-        $this->SoapClientAdd                = new SoapClient($url);
-        /*
-        $this->SoapClientQueryCalculadora   = new SoapClient($urlC);
-        $this->SoapClientQueryPreinscipcion = new SoapClient($urlP);
-        $this->SoapClientAddNuevoIngreso    = new SoapClient($urlN);
-        */
+        $this->SoapClientQuery    = new SoapClient($url);
+		$this->SoapClientQuerySua = new SoapClient($urlSua);
+        $this->SoapClientAdd      = new SoapClient($url);
+
     }
 
 }
@@ -51,6 +36,141 @@ abstract class WebService{
  * hay que esperar la definicion del formulario ya que podria ser solo una clase para todos los planteles
  * 
  */
+
+class COMBOS extends WebService{
+
+	public function getPlanteles(){
+
+		try {
+			
+			$resultado = $this->SoapClientQuery->__soapCall("ObtenerCatalogoPlanteles", array(
+				"ObtenerCatalogoPlanteles")
+			);
+			$d = $resultado->ObtenerCatalogoPlantelesResult->PlantelesDTO;
+			return $d;
+
+		} catch (\Throwable $th) {
+			throw $th;
+		}
+	}
+
+	public function getNiveles( $idPlantel ){
+
+		try {
+			
+			$resultado = $this->SoapClientQuery->__soapCall("ObtenerCatalogoNivelEscolar", array(
+				"ObtenerCatalogoNivelEscolar" => array(
+					"clavePlantel" => $idPlantel)
+			));
+			$d = $resultado->ObtenerCatalogoNivelEscolarResult->NivelDTO;
+			return $d;
+
+		} catch (\Throwable $th) {
+			throw $th;
+		}
+	}
+	
+	public function getPeriodos( $idPlantel ){
+
+		try {
+			
+			$resultado = $this->SoapClientQuery->__soapCall("ObtenerCatalogoPeriodoEscolar", array(
+				"ObtenerCatalogoPeriodoEscolar" => array(
+					"clavePlantel" => $idPlantel)
+			));
+			$d = $resultado->ObtenerCatalogoPeriodoEscolarResult->PeriodosDTO;
+			return $d;
+
+		} catch (\Throwable $th) {
+			throw $th;
+		}
+	}
+
+	public function getCarreras( $idNivel, $idPeriodo, $idPlantel ){
+
+		try {
+			
+			$resultado = $this->SoapClientQuery->__soapCall("ObtenerCatalogoCarreras", array(
+
+				"ObtenerCatalogoCarreras" => array(
+					"claveNivel" => $idNivel,
+					"clavePeriodo" => $idPeriodo,
+					"clavePlantel" => $idPlantel
+				)
+			));
+			$d = $resultado->ObtenerCatalogoCarrerasResult->CarerrasDTO;
+			return $d;
+
+		} catch (\Throwable $th) {
+			throw $th;
+		}
+	}
+
+	public function getCarrerasSua( $idModo, $idNivel, $idPeriodo, $idPlantel ){
+
+		try {
+			
+			$resultado = $this->SoapClientQuerySua->__soapCall("ObtenerCatalogoCarreras", array(
+
+				"ObtenerCatalogoCarreras" => array(
+					"clavemodo" => $idModo,
+					"claveNivel" => $idNivel,
+					"clavePeriodo" => $idPeriodo,
+					"clavePlantel" => $idPlantel
+				)
+			));
+			$d = $resultado->ObtenerCatalogoCarrerasResult->CarerrasDTO;
+			return $d;
+
+		} catch (\Throwable $th) {
+			throw $th;
+		}
+	}
+
+	public function getHorarios( $idCarrera, $idNivel, $idPeriodo, $idPlantel ){
+
+		try {
+			
+			$resultado = $this->SoapClientQuery->__soapCall("ObtenerCatalogoTurnos", array(
+				"ObtenerCatalogoTurnos" => array(
+					"claveCarrera" => $idCarrera,
+					"claveNivel" => $idNivel,
+					"clavePeriodo" => $idPeriodo,
+					"clavePlantel" => $idPlantel
+				)
+			));
+			$d = $resultado->ObtenerCatalogoTurnosResult->TurnosDTO;
+			return $d;
+
+		} catch (\Throwable $th) {
+			throw $th;
+		}
+	}
+
+}
+
+class AddProspecto extends WebService{
+
+	public function addProspecto( $args = array() ){
+
+		try {
+			
+			$resultado = $this->SoapClientAdd->__soapCall("AgregarProspectoCRM", array(
+				"AgregarProspectoCRM" => array( $args )
+			));
+
+			$d = $resultado->AgregarProspectoCRMResult;
+			return $d;
+
+		} catch (\Throwable $th) {
+			throw $th;
+		}
+	}
+
+}
+			
+			
+/*
 
 class IZCALlI  extends WebService{
 
@@ -132,6 +252,7 @@ class VERACRUZ  extends WebService{
 	}
     
 }
+*/
 
 
 ?>
