@@ -151,20 +151,26 @@ class COMBOS extends WebService{
 
 class AddProspecto extends WebService{
 
-	public function addProspecto( $args = array() ){
+	public function agregaProspecto( $args = array() ){
 
+		if( empty($args) ){
+			return false;
+		}
+		
 		try {
 			
 			$resultado = $this->SoapClientAdd->__soapCall("AgregarProspectoCRM", array(
-				"AgregarProspectoCRM" => array( $args )
+				"AgregarProspectoCRM" => $args
 			));
 
 			$d = $resultado->AgregarProspectoCRMResult;
 			return $d;
 
 		} catch (\Throwable $th) {
-			throw $th;
+			echo 'el error es: '.$th->getMessage();
+			//throw $th;
 		}
+		
 	}
 
 }
