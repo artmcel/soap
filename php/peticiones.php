@@ -4,6 +4,15 @@
  * archivo para recibir los datos y enviarlos al ws
  * 
  */
+/**
+ * headers
+ */
+/*
+header('Access-Control-Allow-Origin: *');
+header("Allow: GET, POST, OPTIONS, PUT, DELETE");
+*/
+header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 
 /**
  * request url
@@ -80,6 +89,16 @@ $obtenerHorarios = function( $idCa, $idNi, $idPe, $idPl ){
 };
 
 
+$guardaDatos = function( $args= array() ){
+   
+    require('../ws/web-service.php');
+    $ws = new AddProspecto();
+    $resultado = $ws->agregaProspecto( $args );
+    echo json_encode($resultado);
+
+};
+
+
 //$obtenerNivel($idPlantel);
 //$obtenerPeriodo($idPlantel);
 //$obtenerCarreras($idNivel, $idPeriodo, $idPlantel);
@@ -104,6 +123,40 @@ if( $url == "carreras" ){
 if( $url == "horarios" ){
     $obtenerHorarios($idCarrera, $idNivel, $idPeriodo, $idPlantel);
 };
+
+if( $url == "guardaDatos" ){
+    
+    $recibeJson = json_decode(file_get_contents('php://input'), false);
+    //echo json_encode($args);
+    $datos = (array)$recibeJson;
+
+    $args = array(
+
+        'campaingContent'=> $datos['utm_content'],
+        'campaignMedium'=> null,
+        'campaignTerm'=> $datos['utm_id'],
+        'descripPublicidad'=> $datos['utm_campaign'],
+        'folioReferido'=> '0',               
+        'pApMaterno' => $datos['amaterno'],
+        'pApPaterno' => $datos['apaterno'],
+        'pCarrera' => $datos['carrera'],
+        'pCelular' => $datos['celular'],
+        'pCorreo' => $datos['email'],
+        'pHorario' => $datos['horario'],
+        'pNivel_Estudio' => $datos['nivel'],
+	    'pNombre' => $datos['nombre'],
+        'pOrigen' => '13',
+        'pPeriodoEscolar' => $datos['periodo'],
+        'pPlantel' => $datos['plantel'],
+        'pTelefono' => $datos['telefono'],
+        'utpsource'=> $datos['utm_source'],
+        'websiteURL'=> null,
+    );
+
+    //print_r($args);
+    $guardaDatos($args);
+
+}
 
 
 
