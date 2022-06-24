@@ -17,8 +17,8 @@ abstract class WebService{
          * esperamos la url de los ws
          */
 
-        $url    = "http://187.188.111.155/TestingWSOperacionesUnificadas/OperacionesUnificadas.asmx?WSDL";
-		$urlSua = "http://187.188.111.155/TestingWSOperacionesUnificadas/SideTrack.asmx?WSDL";
+        $url    = "http://comunimex.lat/TestingWSOperacionesUnificadas/OperacionesUnificadas.asmx?WSDL";
+		$urlSua = "http://comunimex.lat/TestingWSOperacionesUnificadas/SideTrack.asmx?WSDL";
 
         //llamadas al soapClient
         $this->SoapClientQuery    = new SoapClient($url);
