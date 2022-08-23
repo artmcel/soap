@@ -1,5 +1,4 @@
-# Proyecto de Sidetrack
-
+# Simple SoapCall
 Backend en php para el proyecto de las landings de SideTrack.
 
 Todas las peticiones estan ubicadas en `php/peticiones.php`. Se crea a base de funciones anonimas las cuales llaman a su respectiva `class`.
